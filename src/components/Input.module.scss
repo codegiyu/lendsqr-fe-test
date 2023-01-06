@@ -1,0 +1,36 @@
+@use "../index.scss";
+
+.input__wrap {
+    width: 100%;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    background: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: index.$bg-grey;
+    padding: 15px;
+    border: 2px solid index.$bg-grey15;
+    border-radius: 5px;
+    &::placeholder {
+        opacity: 0.6;
+    }
+}
+
+.password__toggle {
+    position:absolute;
+    bottom: 19px;
+    right: 15px;
+    & > p {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: index.$bg-teal;
+        cursor: pointer;
+    }
+}

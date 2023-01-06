@@ -1,0 +1,98 @@
+@use "../index.scss";
+
+.login__body {
+    width: 100%;
+    position: relative;
+    font-family: index.$ff-sen;
+}
+
+.login__header {
+    width: 100%;
+    padding: 64px 64px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo__wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.logo {
+    aspect-ratio: 1;
+    width: 25px;
+    margin-top: 2px;
+}
+
+.logotext {
+    height: 36px;
+}
+
+.login__main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.login__img_section {
+    width: 50%;
+    height: 100%;
+    background: #fdfdfd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login__hero {
+    background-blend-mode: color-burn;
+}
+
+.login__form_section {
+    width: 50%;
+    height: 100%;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 80px;
+}
+
+.login__form {
+    width: 500px;
+}
+
+.form__header {
+    color: index.$bg-blue;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    letter-spacing: -0.04em;
+}
+
+.form__instruction {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    color: index.$bg-grey;
+    margin: 0 0 50px;
+}
+
+.form__input_wrap {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.forgot_password {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: index.$bg-teal;
+    margin: 25px 0 30px;
+}

@@ -1,0 +1,17 @@
+@use "../index.scss";
+
+.button {
+    width: 100%;
+    background: index.$bg-teal;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #FFFFFF;
+}
