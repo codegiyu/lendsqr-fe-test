@@ -1,0 +1,172 @@
+@use "../index.scss";
+
+.page__body {
+    width: 100%;
+    min-height: 100vh;
+    background: #FFFFFF;
+    font-family: index.$ff-work;
+    font-size: 16px;
+    line-height: 19px;
+    color: index.$bg-blue;
+}
+
+.page__header {
+    width: 100%;
+    padding: 40px 64px 40px 30px;
+    box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+}
+
+.page__header_wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page__logo_wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    & > .page__logo {
+        aspect-ratio: 1;
+        width: 20px;
+        margin-top: 2px;
+    }
+    & > .page__logotext {
+        height: 25px;
+    }
+}
+
+.search_form {
+    width: 400px;
+
+    & > .search_form__wrap {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        & > .search__input_wrap {
+            flex: 1;
+        }
+
+        & > .search__btn_wrap {
+            width: 56px;
+            height: 54px;
+
+            & .search_icon {
+                font-size: 20px;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+.page__right_group {
+    display: flex;
+    align-items: center;
+}
+
+.page__docs {
+    text-decoration: underline;
+    color: index.$bg-blue;
+
+    & > p {
+        font-weight: 400;
+    }
+}
+
+.page__notification {
+    text-decoration: none;
+    margin-left: 40px;
+
+    & .page__notification_icon {
+        font-size: 32px;
+        color: index.$bg-blue;
+    }
+}
+
+.page__user_img {
+    width: 48px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-left: 30px;
+}
+
+.page__dropdown {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-left: 15px;
+
+    & p {
+        font-weight: 500;
+    }
+
+    & .page__dropdown_icon {
+        font-size: 15px;
+        margin-top: 2px;
+        color: index.$bg-blue;
+    }
+}
+
+.page__main {
+    width: 100%;
+    display: flex;
+}
+
+.page__sidenav {
+    width: 280px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.page__sidenav_wrap {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.page__organisation {
+    padding: 10px 30px;
+    margin-bottom: 40px;
+    & > p {
+        font-weight: 400;
+    }
+}
+
+.page__dashboard {
+    padding: 10px 30px;
+    margin-bottom: 40px;
+    & > p {
+        font-weight: 400;
+    }
+}
+
+.page__category_heading {
+    padding: 10px 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.page__sidenav_ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 40px;
+
+    & > li {
+        width: 100%;
+        padding: 10px 30px;
+
+        & > p {
+            font-weight: 400;
+            opacity: 0.4;
+        }
+    }
+}
+
+.page__content_wrap {
+    flex: 1;
+    padding: 100px 64px;
+}

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import styles from "./Home.module.scss";
+import classes from "./Home.module.scss";
 import { useNavigate } from "react-router-dom";
 import useUserStore from '../store/zustand/userStore';
+import Layout from "../layout/Layout";
 
 
 const Home: React.FC = () => {
@@ -16,9 +17,11 @@ const Home: React.FC = () => {
     })
     
     return (
-        <div className={styles.home__body} >
+        <Layout>
+            <section className={classes.home__content_wrap}>
 
-        </div>
+            </section>
+        </Layout>
     )
 }
 

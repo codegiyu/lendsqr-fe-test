@@ -1,11 +1,11 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-interface User {
+export interface User {
     firstname: string,
     lastname: string,
     avatar: string,
-    id: number | null,
+    id: string,
     email: string
 }
 
@@ -21,8 +21,60 @@ const noUser = {
     firstname: "",
     lastname: "",
     avatar: "",
-    id: null,
+    id: "",
     email: ""
+}
+
+
+interface UserProfile {
+    "firstName": string;
+    "lastName": string;
+    "phoneNumber": string;
+    "avatar": string;
+    "gender": string;
+    "bvn": string;
+    "address": string;
+    "currency": string;
+}
+
+interface UserGuarantor {
+    "firstName": string;
+    "lastName": string;
+    "phoneNumber": string;
+    "gender": string;
+    "address": string;
+}
+
+interface UserSocials {
+    "facebook": string;
+    "instagram": string;
+    "twitter": string;
+}
+
+interface UserEducation {
+    "level": string;
+    "employmentStatus": string;
+    "sector": string;
+    "duration": string;
+    "officeEmail": string;
+    "monthlyIncome": string[];
+    "loanRepayment": string;
+}
+
+export interface CompleteUser {
+    "createdAt": string;
+    "orgName": string;
+    "userName": string;
+    "email": string;
+    "phoneNumber": string;
+    "lastActiveDate": string;
+    "profile": UserProfile;
+    "guarantor": UserGuarantor;
+    "accountBalance": string;
+    "accountNumber": string;
+    "socials": UserSocials;
+    "education": UserEducation;
+    "id": string;
 }
 
 const useUserStore = create<UserState>()(
@@ -32,14 +84,14 @@ const useUserStore = create<UserState>()(
             firstname: "",
             lastname: "",
             avatar: "",
-            id: null,
+            id: "",
             email: ""
         },
         setIsLoggedIn: (val) => set(() => (
             { isLoggedIn: val }
         )),
         setUser: (obj) => set(() => (
-            { user: obj }
+            { user: obj, isLoggedIn: true }
         )),
         logoutUser: () => set(() => (
             { isLoggedIn: false, user: noUser }
