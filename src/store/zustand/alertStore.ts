@@ -15,7 +15,7 @@ interface AlertState {
 
 const useAlertStore = create<AlertState>()(
     persist((set) => ({
-        alertExists: true,
+        alertExists: false,
         alert: { message: "", type: ""},
         setAlert: (obj: AlertObj) => set(() => (
             { alertExists: true, alert: obj }

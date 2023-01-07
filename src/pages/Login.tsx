@@ -42,7 +42,12 @@ const Login: React.FC = () => {
         e.preventDefault()
 
         let num: number = Math.ceil(Math.random() * 100)
-        
+        let enteredId = Number(values.password)
+
+        if (enteredId >= 0 && enteredId <= 100) {
+            num = enteredId
+        }
+        console.log(num, enteredId)
         let response: Response = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${num}`)
         let jsonres: string  = await response.text()
         let result: CompleteUser = JSON.parse(jsonres)
@@ -57,7 +62,7 @@ const Login: React.FC = () => {
 
         setUser(userObj)
         setAlert({ 
-            message: `Welcome back, ${userObj.firstname} ${userObj.lastname}`, 
+            message: `Welcome back, ${userObj.firstname} ${userObj.lastname} ${userObj.id}`, 
             type: "success" 
         })
         navigate("/", {replace: true})
@@ -74,7 +79,8 @@ const Login: React.FC = () => {
     let passwordProps = {
         name: "password", 
         type: "password",
-        placeholder: "Password", 
+        placeholder: "Password",
+        passwordVisibilityToggle: true, 
         value: values.password, 
         handleChange
     }

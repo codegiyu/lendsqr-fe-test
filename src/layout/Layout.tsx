@@ -7,16 +7,23 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import Input from "../components/Input";
 import { TbSearch } from "react-icons/tb";
 import { IoIosNotificationsOutline, IoMdArrowDropdown } from "react-icons/io";
-// import { TbSearch } from "react-icons/tb";
 import Button from "../components/Button";
 import useUserStore from "../store/zustand/userStore";
+import Sidenav from "../components/Sidenav";
 
+
+interface layoutProps {
+    page: string;
+}
 
 interface Props {
+    layoutProps: layoutProps;
     children: React.ReactNode;
 }
 
 const Layout: React.FC<Props> = (props) => {
+    let {page} = props.layoutProps
+
     let [value, setValue] = useState<string>("")
 
     let user = useUserStore(state => state.user)
@@ -27,6 +34,7 @@ const Layout: React.FC<Props> = (props) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
+        setValue("")
     }
 
     let searchProps = {
@@ -45,7 +53,7 @@ const Layout: React.FC<Props> = (props) => {
                         <img src={ logo } alt="logo" className={classes.page__logo} />
                         <img src={ lendsqr } alt="lendsqr" className={classes.page__logotext} />
                     </div>
-                    <form className={classes.search_form} onChange={handleSubmit}>
+                    <form className={classes.search_form} onSubmit={handleSubmit}>
                         <div className={classes.search_form__wrap}>
                             <div className={classes.search__input_wrap}>
                                 <ErrorBoundary>
@@ -82,121 +90,9 @@ const Layout: React.FC<Props> = (props) => {
             </header>
             <main className={classes.page__main}>
                 <div className={classes.page__sidenav}>
-                    <div className={classes.page__sidenav_wrap}>
-                        <div className={classes.page__organisation}>
-                            <span></span>
-                            <p>Switch Organisation</p>
-                            <span></span>
-                        </div>
-                        
-                        <div className={classes.page__dashboard}>
-                            <span></span>
-                            <p>Dashboard</p>
-                        </div>
-
-                        <p className={classes.page__category_heading}>Customers</p>
-                        <ul className={classes.page__sidenav_ul}>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Users</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Guarantors</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Loans</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Decision Models</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Savings</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Loan Requests</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Whitelist</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Karma</p>
-                            </li>
-                        </ul>
-
-                        <p className={classes.page__category_heading}>Businesses</p>
-                        <ul className={classes.page__sidenav_ul}>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Organization</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Loan Products</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Savings Products</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Fees and Charges</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Transactions</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Services</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Service Account</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Settlement</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Reports</p>
-                            </li>
-                        </ul>
-
-                        <p className={classes.page__category_heading}>Settings</p>
-                        <ul className={classes.page__sidenav_ul}>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Preferences</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Fees and Pricing</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>Audit Logs</p>
-                            </li>
-                            <li className={classes.page__li}>
-                                <span></span>
-                                <p>System Messages</p>
-                            </li>
-                        </ul>
-                        <div className={classes.page__sidenav_end_wrap}>
-                            <div className={classes.page__logout_wrap}>
-                                <span></span>
-                                <p>Logout</p>
-                            </div>
-                            <p className={classes.page__version}>v1.2.0</p>
-                        </div>
-                    </div>
+                    <ErrorBoundary>
+                        <Sidenav page={page} />
+                    </ErrorBoundary>
                 </div>
                 <div className={classes.page__content_wrap}>
                     {props.children}

@@ -1,0 +1,152 @@
+@use "../index.scss";
+
+.page__sidenav_wrap {
+    width: 100%;
+    padding: 20px 0 0;
+}
+
+.page__link {
+    text-decoration: none;
+
+    &:active p {
+        color: index.$bg-teal;
+    }
+}
+
+.page__organisation {
+    width: 100%;
+    padding: 10px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & p {
+        font-weight: 400;
+        margin-top: -4px;
+    }
+}
+
+.page__dashboard {
+    width: 100%;
+    margin-bottom: 15px;
+
+    & div {
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        cursor: pointer;
+        opacity: 0.4;
+
+        &:hover {
+            opacity: 1;
+
+            &::before {
+                content: "";
+                width: 3px;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: index.$bg-teal;
+            }
+        }
+    }
+
+    & div.active_page {
+        opacity: 1;
+    }
+
+    & p {
+        font-weight: 400;
+        margin-top: -4px;
+    }
+}
+
+.page__category_heading {
+    padding: 10px 30px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: index.$bg-grey;
+    text-transform: uppercase;
+}
+
+.page__sidenav_ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 40px;
+
+    & li {
+        width: 100%;
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        cursor: pointer;
+        opacity: 0.4;
+
+        & > p {
+            font-weight: 400;
+            margin-top: -3px;
+        }
+
+        &:hover {
+            opacity: 1;
+
+            &::before {
+                content: "";
+                width: 3px;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: index.$bg-teal;
+            }
+        }
+    }
+
+    & > li.active_page {
+        opacity: 1;
+
+        &::before {
+            content: "";
+            width: 3px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: index.$bg-teal;
+        }
+    }
+}
+
+.page__sidenav_end_wrap {
+    border-top: 1px solid index.$bg-blue10;
+    padding: 20px 0;
+
+    & .page__logout_wrap {
+        width: 100%;
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        cursor: pointer;
+
+        & > p {
+            font-weight: 400;
+            margin-top: -3px;
+        }
+    }
+
+    & .page__version {
+        width: 100%;
+        padding: 12px 30px;
+    }
+}
