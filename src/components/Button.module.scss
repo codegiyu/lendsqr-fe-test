@@ -15,8 +15,13 @@
     padding: 15px;
     color: #FFFFFF;
     cursor: pointer;
+
     &:active {
         transform: scale(0.95);
+    }
+
+    &:hover, &:focus {
+        background: index.$bg-tealDark;
     }
 }
 
@@ -34,5 +39,120 @@
     cursor: pointer;
     &:active {
         transform: scale(0.95);
+    }
+}
+
+.teal_ghost_btn {
+    width: 100%;
+    background: white;
+    border: 1px solid index.$bg-teal;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px;
+    color: index.$bg-teal;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:hover, &:focus {
+        background: index.$bg-teal;
+        color: #FFFFFF;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}
+
+.grey_ghost_btn {
+    width: 100%;
+    background: white;
+    border: 1px solid index.$bg-grey;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    padding: 10px;
+    color: index.$bg-grey;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:hover, &:focus {
+        background: index.$bg-grey;
+        color: #FFFFFF;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}
+
+.red_ghost_btn {
+    width: 100%;
+    background: white;
+    border: 1px solid index.$bg-red;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px;
+    color: index.$bg-red;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:hover, &:focus {
+        background: index.$bg-red;
+        color: #FFFFFF;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}
+
+.filter_button {
+    width: 100%;
+    background: index.$bg-teal;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    padding: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:hover, &:focus {
+        background: index.$bg-tealDark;
+    }
+
+    &:disabled {
+        opacity: 0.6;
     }
 }

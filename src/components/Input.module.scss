@@ -67,3 +67,58 @@
         cursor: pointer;
     }
 }
+
+.label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: index.$bg-grey;
+    margin-bottom: 5px;
+}
+
+.filter_inputs {
+    width: 100%;
+    background: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: index.$bg-grey;
+    padding: 10px 15px;
+    outline: none;
+    border: 1px solid index.$bg-blue20;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+    &:focus {
+        border: 1px solid index.$bg-teal;
+        box-shadow: 0 0 1px 2px index.$bg-teal55;
+    }
+    &:hover {
+        border-color: index.$bg-teal;
+    }
+    &::placeholder {
+        opacity: 0.7;
+    }
+}
+
+.select {
+    width: 100%;
+    background: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: index.$bg-grey;
+    padding: 10px 15px;
+    outline: none;
+    border: 1px solid index.$bg-blue20;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+    &:focus {
+        border: 1px solid index.$bg-teal;
+        box-shadow: 0 0 1px 2px index.$bg-teal55;
+    }
+    &:hover {
+        border-color: index.$bg-teal;
+    }
+}

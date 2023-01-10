@@ -1,4 +1,111 @@
-.home__content_wrap {
+@use "../index.scss";
+
+.users__content_wrap {
     width: 100%;
     background: #fdfdfd;
+    font-family: "Work Sans", sans-serif;
+    padding: 50px 64px;
+}
+
+.users__heading {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: index.$bg-blue;
+    margin: 10px 0;
+}
+
+.status_section {
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    gap: 20px;
+
+    & > .status_box_wrap {
+        flex: 1;
+    }
+}
+
+.table_section {
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    position: relative;
+
+    & form {
+        width: 270px;
+        padding: 30px 20px;
+
+        & .btn_row {
+            width: 100&;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            & .btn_wrap {
+                width: 50%;
+            }
+        }
+    }
+}
+
+.users_table {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 1px;
+
+    & thead {
+        width: 100%;
+
+        & tr {
+            width: 100%;
+            
+        }
+    }
+
+    & > thead > tr > th {
+        width: auto;
+        text-align: start;
+
+        & > p {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+            text-transform: uppercase;
+            color: index.$bg-grey;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 1px;
+        }
+
+        & .filter_icon {
+            font-size: 14px;
+            color: index.$bg-blue;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: pointer;
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+
+    & tbody {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: index.$bg-grey;
+    }
+}
+
+
+.users__pagination {
+    width: 100%;
+    margin: 40px 0;
 }

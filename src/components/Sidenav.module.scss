@@ -2,7 +2,7 @@
 
 .page__sidenav_wrap {
     width: 100%;
-    padding: 20px 0 0;
+    padding: 25px 0 0;
 }
 
 .page__link {
@@ -111,7 +111,7 @@
         }
     }
 
-    & > li.active_page {
+    &  li.active_page {
         opacity: 1;
 
         &::before {

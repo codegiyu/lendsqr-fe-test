@@ -24,6 +24,7 @@ import userTimes from "../images/nav-user-times.svg";
 import users from "../images/nav-users.svg";
 import useAlertStore from "../store/zustand/alertStore";
 import useUserStore from "../store/zustand/userStore";
+import useAllUsersStore from "../store/zustand/allUsersStore";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -36,11 +37,14 @@ const Sidenav: React.FC<Props> = ({page}) => {
 
     const logoutUser = useUserStore(state => state.logoutUser)
     const setAlert = useAlertStore(state => state.setAlert)
+    const clearAllUsers = useAllUsersStore(state => state.clearAllUsers)
 
     const handleLogout = () => {
         logoutUser()
+        clearAllUsers()
         setAlert({ message: "You have logged out successfully", type: "success" })
-        navigate("/login")
+        navigate("/login", {replace: true})
+        
     }
 
     return (

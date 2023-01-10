@@ -38,34 +38,48 @@ const Login: React.FC = () => {
         })
     }
     
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
         let num: number = Math.ceil(Math.random() * 100)
         let enteredId = Number(values.password)
 
-        if (enteredId >= 0 && enteredId <= 100) {
+        if (enteredId >= 1 && enteredId <= 100) {
             num = enteredId
         }
-        console.log(num, enteredId)
-        let response: Response = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${num}`)
-        let jsonres: string  = await response.text()
-        let result: CompleteUser = JSON.parse(jsonres)
 
-        let userObj: User = {
-            firstname: result.profile.firstName,
-            lastname: result.profile.lastName,
-            avatar: result.profile.avatar,
-            id: result.id,
-            email: result.email
-        }
-
-        setUser(userObj)
-        setAlert({ 
-            message: `Welcome back, ${userObj.firstname} ${userObj.lastname} ${userObj.id}`, 
-            type: "success" 
+        fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${num}`)
+        .then(response => {
+            if (response.status === 200) {
+                return response.text()
+            }
+            throw new Error(response.statusText)
         })
-        navigate("/", {replace: true})
+        .then(jsonres => {
+            let result: CompleteUser = JSON.parse(jsonres)
+
+            let userObj: User = {
+                firstname: result.profile.firstName,
+                lastname: result.profile.lastName,
+                avatar: result.profile.avatar,
+                id: result.id,
+                email: result.email
+            }
+
+            setUser(userObj)
+            setAlert({ 
+                message: `Welcome back, ${userObj.firstname} ${userObj.lastname}`, 
+                type: "success" 
+            })
+            navigate("/", {replace: true})
+        })
+        .catch(error => {
+            setAlert({ 
+                message: error.message, 
+                type: "error" 
+            })
+        })
+        
     }
 
     let emailProps = {

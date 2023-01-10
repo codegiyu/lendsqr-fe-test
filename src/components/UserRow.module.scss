@@ -1,0 +1,91 @@
+@use "../index.scss";
+
+
+tr {
+    height: 56px;
+    border-bottom: 1px solid index.$bg-blue10;
+
+    & .button_cell {
+        text-align: center;
+        position: relative;
+    }
+
+    & span {
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    & span.status_blacklisted {
+        background: index.$bg-red10;
+        color: index.$bg-red;
+    }
+
+    & span.status_inactive {
+        background: index.$bg-grey06;
+        color: index.$bg-grey;
+    }
+
+    & span.status_pending {
+        background: index.$bg-yellow10;
+        color: index.$bg-yellow;
+    }
+
+    & span.status_active {
+        background: index.$bg-green10;
+        color: index.$bg-green;
+    }
+
+    & button {
+        margin: 0 auto;
+        outline: none;
+        border: none;
+        background: white;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background: index.$bg-grey15;
+        }
+    }
+}
+
+.modal_wrap {
+    width: 180px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+
+    & .user_modal_button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        background: #FFFFFF;
+        outline: none;
+        border: none;
+
+        &:disabled {
+            opacity: 0.4;
+        }
+
+        & .user_modal_icon {
+            color: index.$bg-grey;
+            font-size: 14px;
+        }
+
+        & .user_modal_img {
+            width: 14px;
+        }
+
+        & p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: index.$bg-grey;
+        }
+    }
+}

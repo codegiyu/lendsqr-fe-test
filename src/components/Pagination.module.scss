@@ -1,0 +1,113 @@
+@use "../index.scss";
+
+
+.pagination_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showing_wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & > p {
+        font-size: 14px;
+        line-height: 16px;
+        color: index.$bg-grey;
+    }
+
+    & > select {
+        // width: 80px;
+        background: index.$bg-blue10;
+        padding: 7px 10px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 500;
+        color: index.$bg-blue;
+    }
+}
+
+.buttons_wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & > button {
+        border: none;
+        outline: none;
+        width: 24px;
+        aspect-ratio: 1;
+        background: index.$bg-blue10;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover, &:focus {
+            background: index.$bg-blue60;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        & > span {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        & .page_icons {
+            color: index.$bg-blue;
+            font-size: 14px;
+        }
+    }
+
+    & .page_buttons_wrap {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        & button {
+            width: 24px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: index.$bg-blue;
+            opacity: 0.6;
+            cursor: pointer;
+
+            &:hover, &:focus {
+                background: index.$bg-blue20;
+                opacity: 1;
+            }
+        }
+
+        & button.no_page_btn {
+            cursor: not-allowed;
+            &:hover, &:focus {
+                background: #FFFFFF;
+                opacity: 0.6;
+            }
+        }
+
+        & button.selected_page_btn {
+            opacity: 1;
+            border: 1px solid index.$bg-blue
+        }
+    }
+}

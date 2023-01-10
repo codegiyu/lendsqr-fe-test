@@ -112,6 +112,7 @@
 .page__main {
     width: 100%;
     display: flex;
+    align-items: flex-start;
 }
 
 .page__sidenav {
@@ -123,5 +124,4 @@
 
 .page__content_wrap {
     flex: 1;
-    padding: 100px 64px;
 }
