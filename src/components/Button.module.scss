@@ -69,6 +69,13 @@
 
     &:disabled {
         opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    @include index.devices(sm) {
+        font-size: 12px;
+        line-height: 14px;
+        padding: 10px
     }
 }
 
@@ -127,6 +134,13 @@
 
     &:disabled {
         opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    @include index.devices(sm) {
+        font-size: 12px;
+        line-height: 14px;
+        padding: 10px
     }
 }
 

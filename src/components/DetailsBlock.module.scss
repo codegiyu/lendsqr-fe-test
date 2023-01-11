@@ -1,0 +1,22 @@
+@use "../index.scss";
+
+.details_block_wrap {
+    width: 100%;
+    padding: 30px 30px 30px 0;
+    border-bottom: 1px solid index.$bg-blue10;
+
+    & .block_title {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: index.$bg-blue;
+        margin-bottom: 30px;
+    }
+
+    & .block_details_wrap {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px 100px;
+    }
+}

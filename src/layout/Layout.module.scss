@@ -30,6 +30,7 @@
         border: none;
         border-radius: 5px;
         z-index: 99;
+        display: none;
 
         &:hover {
             background: index.$bg-grey06;
@@ -48,6 +49,12 @@
 
     @include index.devices(xl) {
         padding: 35px 32px 35px 30px;
+    }
+
+    @include index.devices(md) {
+        & .menu_btn {
+            display: block;
+        }
     }
 
     @include index.devices(sm) {
@@ -252,6 +259,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    background: #FDFDFD;
 
     & .page__sidenav {
         width: 280px;

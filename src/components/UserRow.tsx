@@ -8,27 +8,36 @@ import blacklist from "../images/blacklist.svg";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import { Link } from "react-router-dom";
 
-export const stringDate = (str: string) => {
-    let date = new Date(str)
-
-    let day: string[] | string = date.toString().slice(4, 15).split("")
-    day.splice(6, 0, ",")
-    day = day.join("")
-
-    let time: string[] | string = date.toLocaleTimeString().split("")
-    time.splice(-6, 3)
-    time = time.join("")
-
-    return day + " " + time
+export const stringDate = (str: string | undefined) => {
+    if (str) {
+        let date = new Date(str)
+    
+        let day: string[] | string = date.toString().slice(4, 15).split("")
+        day.splice(6, 0, ",")
+        day = day.join("")
+    
+        let time: string[] | string = date.toLocaleTimeString().split("")
+        time.splice(-6, 3)
+        time = time.join("")
+    
+        return day + " " + time
+    }
+    return "nil"
 }
 
-const formatOrgName = (name: string) => {
-    return name[0].toUpperCase() + name.slice(1)
+const formatOrgName = (name: string | undefined) => {
+    if (name) {
+        return name[0].toUpperCase() + name.slice(1)
+    }
+    return "nil"
 }
 
-export const formatPhone = (phone: string) => {
-    let formattedPhone = phone.split("x")[0]
-    return formattedPhone.replaceAll(".", "-")
+export const formatPhone = (phone: string | undefined) => {
+    if (phone) {
+        let formattedPhone = phone.split("x")[0]
+        return formattedPhone.replaceAll(".", "-")
+    }
+    return "nil"
 }
 
 export interface UserRowData {
@@ -46,7 +55,7 @@ interface Props {
     userData: UserRowData;
 }
 
-interface Disabled {
+export interface Disabled {
     activate: boolean;
     blacklist: boolean;
 }
@@ -117,7 +126,7 @@ const UserRow: React.FC<Props> = (props) => {
                 <ErrorBoundary>
                     <Modal modalProps={{modalActive, setModalActive}}>
                         <div className={classes.modal_wrap}>
-                            <Link to={`/user/${id}`}>
+                            <Link to={`/user/${id}`} className={classes.modal_link}>
                                 <button className={classes.user_modal_button}>
                                     <HiOutlineEye className={classes.user_modal_icon} />
                                     <p>View Details</p>

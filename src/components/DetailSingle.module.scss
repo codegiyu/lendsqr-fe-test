@@ -1,0 +1,25 @@
+@use "../index.scss";
+
+.detail_wrap {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    & .detail_title {
+        width: fit-content;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        text-transform: uppercase;
+        color: index.$bg-grey;
+    }
+
+    & .detail_value {
+        width: fit-content;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: index.$bg-grey;
+    }
+}

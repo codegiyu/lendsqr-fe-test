@@ -58,12 +58,16 @@ tr {
     display: flex;
     flex-direction: column;
 
+    & .modal_link {
+        text-decoration: none;
+    }
+
     & .user_modal_button {
         width: 100%;
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 20px;
+        padding: 10px 20px;
         background: #FFFFFF;
         outline: none;
         border: none;
