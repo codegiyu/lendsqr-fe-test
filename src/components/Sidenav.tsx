@@ -27,6 +27,7 @@ import useUserStore from "../store/zustand/userStore";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { BiChevronDown } from "react-icons/bi";
 
 interface Props {
     page: string
@@ -55,7 +56,9 @@ const Sidenav: React.FC<Props> = ({page}) => {
                 </span>
                 <div className={classes.organisation_select}>
                     <p>Switch Organisation</p>
-                    <span></span>
+                    <span>
+                        <BiChevronDown className={classes.organisation_icon} />
+                    </span>
                 </div>
             </div>
             

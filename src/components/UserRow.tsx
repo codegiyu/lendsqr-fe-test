@@ -6,6 +6,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import activate from "../images/activate.svg";
 import blacklist from "../images/blacklist.svg";
 import useAllUsersStore from "../store/zustand/allUsersStore";
+import { Link } from "react-router-dom";
 
 export const stringDate = (str: string) => {
     let date = new Date(str)
@@ -116,10 +117,12 @@ const UserRow: React.FC<Props> = (props) => {
                 <ErrorBoundary>
                     <Modal modalProps={{modalActive, setModalActive}}>
                         <div className={classes.modal_wrap}>
-                            <button className={classes.user_modal_button}>
-                                <HiOutlineEye className={classes.user_modal_icon} />
-                                <p>View Details</p>
-                            </button>
+                            <Link to={`/user/${id}`}>
+                                <button className={classes.user_modal_button}>
+                                    <HiOutlineEye className={classes.user_modal_icon} />
+                                    <p>View Details</p>
+                                </button>
+                            </Link>
                             <button 
                                 className={classes.user_modal_button} 
                                 disabled={disabled.blacklist}

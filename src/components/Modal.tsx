@@ -3,6 +3,7 @@ import classes from "./Modal.module.scss";
 
 interface ModalProps {
     isFilter?: boolean;
+    forProfile?: boolean;
     modalActive: boolean;
     setModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -16,7 +17,7 @@ interface Props {
 const Modal: React.FC<Props> = (props) => {
     let modalRef = useRef<null | HTMLDivElement>(null)
 
-    let {isFilter = false, modalActive} = props.modalProps
+    let {isFilter = false, modalActive, forProfile = false} = props.modalProps
 
     let modalStyle = modalActive ? {display: "block"} : {display: "none"}
 
@@ -33,6 +34,17 @@ const Modal: React.FC<Props> = (props) => {
     if (isFilter) {
         return (
             <div style={modalStyle} className={classes.filter_modal_box} 
+                // onBlur={handleBlur}
+                ref={modalRef}
+            >
+                {props.children}
+            </div>
+        )
+    }
+
+    if (forProfile) {
+        return (
+            <div style={modalStyle} className={classes.profile_modal_box} 
                 // onBlur={handleBlur}
                 ref={modalRef}
             >

@@ -8,7 +8,6 @@ export interface StatusedUser extends CompleteUser {
 
 interface Store {
     allUsers: StatusedUser[] | null;
-    currentSingleUser: CompleteUser | null;
     totalUsers: number;
     activeUsers: number;
     loanUsers: number;
@@ -47,7 +46,6 @@ const pagination = (num: number, arr: StatusedUser[] | null) => {
 const useAllUsersStore = create<Store>()(
     persist((set, get) => ({
         allUsers: null,
-        currentSingleUser: null,
         totalUsers: 0,
         activeUsers: 0,
         loanUsers: 0,

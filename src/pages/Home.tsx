@@ -355,85 +355,87 @@ const Home: React.FC = () => {
                             </form>
                         </Modal>
                     </ErrorBoundary>
-                    <table className={classes.users_table}>
-                        <colgroup>
-                            <col className={classes.col_1} width="14%" />
-                            <col className={classes.col_2} width="14%" />
-                            <col className={classes.col_3} width="25%" />
-                            <col className={classes.col_4} width="16%" />
-                            <col className={classes.col_5} width="18%" />
-                            <col className={classes.col_6} width="10%" />
-                            <col className={classes.col_7} width="2%" />
-                        </colgroup>
+                    <div className={classes.table__box}>
+                        <table className={classes.users_table}>
+                            <colgroup>
+                                <col className={classes.col_1} width="14%" />
+                                <col className={classes.col_2} width="14%" />
+                                <col className={classes.col_3} width="25%" />
+                                <col className={classes.col_4} width="16%" />
+                                <col className={classes.col_5} width="18%" />
+                                <col className={classes.col_6} width="10%" />
+                                <col className={classes.col_7} width="2%" />
+                            </colgroup>
                         
-                        <thead>
-                            <tr>
-                                <th className={classes.col_1}>
-                                    <p>Organization</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_2}>
-                                    <p>Username</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_3}>
-                                    <p>Email</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_4}>
-                                    <p>Phone Number</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_5}>
-                                    <p>Date Joined</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_6}>
-                                    <p>Status</p>
-                                    <span>
-                                        <IoFilterSharp 
-                                            className={classes.filter_icon} 
-                                            onClick={handleFilterToggle}
-                                        />
-                                    </span>
-                                </th>
-                                <th className={classes.col_7}>
-                                    
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { pageData.length ? (
-                                pageData.map(item => <UserRow key={uuid()} userData={item} />)
-                                ) : null 
-                            }
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    <th className={classes.col_1}>
+                                        <p>Organization</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_2}>
+                                        <p>Username</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_3}>
+                                        <p>Email</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_4}>
+                                        <p>Phone Number</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_5}>
+                                        <p>Date Joined</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_6}>
+                                        <p>Status</p>
+                                        <span>
+                                            <IoFilterSharp
+                                                className={classes.filter_icon}
+                                                onClick={handleFilterToggle}
+                                            />
+                                        </span>
+                                    </th>
+                                    <th className={classes.col_7}>
+                        
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { pageData.length ? (
+                                    pageData.map(item => <UserRow key={uuid()} userData={item} />)
+                                    ) : null
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
                 <section className={classes.users__pagination}>
                     <ErrorBoundary>

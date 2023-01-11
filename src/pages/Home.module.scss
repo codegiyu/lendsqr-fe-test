@@ -4,7 +4,16 @@
     width: 100%;
     background: #fdfdfd;
     font-family: "Work Sans", sans-serif;
-    padding: 50px 64px;
+    padding: 40px 64px;
+    overflow-x: hidden;
+
+    @include index.devices(xl) {
+        padding: 40px 32px;
+    }
+
+    @include index.devices(sm) {
+        padding: 40px 0px;
+    }
 }
 
 .users__heading {
@@ -13,6 +22,10 @@
     line-height: 28px;
     color: index.$bg-blue;
     margin: 10px 0;
+
+    @include index.devices(sm) {
+        padding: 0 16px;
+    }
 }
 
 .status_section {
@@ -24,6 +37,22 @@
     & > .status_box_wrap {
         flex: 1;
     }
+
+    @include index.devices(lg) {
+        flex-wrap: wrap;
+
+        & > .status_box_wrap {
+            flex: 0 0 calc(50% - 10px);
+        }
+    }
+
+    @include index.devices(sm) {
+        padding: 0 16px;
+
+        & > .status_box_wrap {
+            flex: 0 0 100%;
+        }
+    }
 }
 
 .table_section {
@@ -33,6 +62,7 @@
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     position: relative;
+    overflow-x: hidden;
 
     & form {
         width: 270px;
@@ -49,6 +79,15 @@
                 width: 50%;
             }
         }
+    }
+
+    & .table__box {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    @include index.devices(sm) {
+        padding: 20px 10px;
     }
 }
 
@@ -101,6 +140,10 @@
         font-size: 14px;
         line-height: 16px;
         color: index.$bg-grey;
+    }
+
+    @include index.devices(xl) {
+        width: 1050px;
     }
 }
 

@@ -25,6 +25,17 @@
         font-weight: 400;
         margin-top: -4px;
     }
+
+    & .organisation_select {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        cursor: pointer;
+
+        & .organisation_icon {
+            font-size: 20px;
+        }
+    }
 }
 
 .page__dashboard {

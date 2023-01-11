@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Alert from './components/Alert';
 import ErrorBoundary from './components/ErrorBoundary';
 import NoPage from './pages/404';
+import User from './pages/User';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/user/:id' element={<User />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
       </BrowserRouter>

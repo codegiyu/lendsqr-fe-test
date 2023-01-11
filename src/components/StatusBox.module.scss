@@ -31,4 +31,12 @@
         text-transform: uppercase;
         color: index.$bg-blue;
     }
+
+    @include index.devices(xl) {
+        padding: 20px 15px 30px;
+    }
+
+    @include index.devices(lg) {
+        padding: 20px 30px 30px;
+    }
 }

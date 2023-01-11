@@ -5,6 +5,12 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    @include index.devices(sm) {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 16px;
+    }
 }
 
 .showing_wrap {
