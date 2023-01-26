@@ -6,6 +6,7 @@
     font-family: "Work Sans", sans-serif;
     padding: 40px 64px;
     overflow-x: hidden;
+    z-index: 2;
 
     @include index.devices(xl) {
         padding: 40px 32px;
@@ -63,6 +64,7 @@
     border-radius: 4px;
     position: relative;
     overflow-x: hidden;
+    z-index: 2;
 
     & form {
         width: 270px;
@@ -84,6 +86,11 @@
     & .table__box {
         width: 100%;
         overflow-x: scroll;
+        z-index: 2;
+
+        @include index.devices(sm) {
+            width: 100%;
+        }
     }
 
     @include index.devices(sm) {
@@ -92,7 +99,8 @@
 }
 
 .users_table {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     display: table;
     table-layout: fixed;
     border-collapse: collapse;

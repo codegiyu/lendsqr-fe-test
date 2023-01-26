@@ -62,6 +62,8 @@ const Home: React.FC = () => {
     let [modalActive, setModalActive] = useState<boolean>(false)
     let [filterValues, setFilterValues] = useState<FilterValues>(defaultFilters)
 
+    let tableHeight = modalActive ? {minHeight: "600px"} : {}
+
     const handleFilterToggle = () => {
         setModalActive((prevState) => !prevState)
     }
@@ -139,7 +141,7 @@ const Home: React.FC = () => {
     
     useEffect(() => {
         if (!isLoggedIn) {
-            setAlert({ message: "You must be logged in to view this page", type: "error" })
+            setAlert({ message: "You must be logged in to view the Home page", type: "error" })
             navigate("/login")
         }
     })
@@ -355,10 +357,10 @@ const Home: React.FC = () => {
                             </form>
                         </Modal>
                     </ErrorBoundary>
-                    <div className={classes.table__box}>
+                    <div style={tableHeight} className={classes.table__box}>
                         <table className={classes.users_table}>
                             <colgroup>
-                                <col className={classes.col_1} width="14%" />
+                                <col className={classes.col_1} width="15%" />
                                 <col className={classes.col_2} width="14%" />
                                 <col className={classes.col_3} width="25%" />
                                 <col className={classes.col_4} width="16%" />

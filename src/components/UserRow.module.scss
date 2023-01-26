@@ -72,6 +72,10 @@ tr {
         outline: none;
         border: none;
 
+        &:hover {
+            background: #EEEEEE;
+        }
+
         &:disabled {
             opacity: 0.4;
         }

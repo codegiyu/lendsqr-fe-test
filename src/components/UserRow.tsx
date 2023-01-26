@@ -73,6 +73,10 @@ const UserRow: React.FC<Props> = (props) => {
         setModalActive((prevState: boolean) => !prevState)
     }
 
+    const handleDotsBlur = () => {
+        setModalActive(false)
+    }
+
     const handleActivate = () => {
         activateUser(id)
     }
@@ -120,37 +124,35 @@ const UserRow: React.FC<Props> = (props) => {
                 }
             </td>
             <td  className={classes.button_cell}>
-                <button className={classes.dots_button} onClick={handleDotsClick}>
+                <button className={classes.dots_button} onClick={handleDotsClick} onBlur={handleDotsBlur}>
                     <HiDotsVertical className={classes.dots_icon} />
                 </button>
-                <ErrorBoundary>
-                    <Modal modalProps={{modalActive, setModalActive}}>
-                        <div className={classes.modal_wrap}>
-                            <Link to={`/user/${id}`} className={classes.modal_link}>
-                                <button className={classes.user_modal_button}>
-                                    <HiOutlineEye className={classes.user_modal_icon} />
-                                    <p>View Details</p>
-                                </button>
-                            </Link>
-                            <button 
-                                className={classes.user_modal_button} 
-                                disabled={disabled.blacklist}
-                                onClick={handleBlacklist}
-                            >
-                                <img src={blacklist} alt="s" className={classes.user_modal_img} />
-                                <p>Blacklist User</p>
+                <Modal modalProps={{modalActive, setModalActive}}>
+                    <div className={classes.modal_wrap}>
+                        <Link to={`/user/${id}`} className={classes.modal_link}>
+                            <button className={classes.user_modal_button}>
+                                <HiOutlineEye className={classes.user_modal_icon} />
+                                <p>View Details</p>
                             </button>
-                            <button 
-                                className={classes.user_modal_button} 
-                                disabled={disabled.activate}
-                                onClick={handleActivate}
-                            >
-                                <img src={activate} alt="s" className={classes.user_modal_img} />
-                                <p>Activate User</p>
-                            </button>
-                        </div>
-                    </Modal>
-                </ErrorBoundary>
+                        </Link>
+                        <button 
+                            className={classes.user_modal_button} 
+                            disabled={disabled.blacklist}
+                            onClick={handleBlacklist}
+                        >
+                            <img src={blacklist} alt="s" className={classes.user_modal_img} />
+                            <p>Blacklist User</p>
+                        </button>
+                        <button 
+                            className={classes.user_modal_button} 
+                            disabled={disabled.activate}
+                            onClick={handleActivate}
+                        >
+                            <img src={activate} alt="s" className={classes.user_modal_img} />
+                            <p>Activate User</p>
+                        </button>
+                    </div>
+                </Modal>
             </td>
         </tr>
     )

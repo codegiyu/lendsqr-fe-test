@@ -1,19 +1,38 @@
 @use "../index.scss";
 
 
-.alert__wrap {
+.alert__main_wrap {
     width: 500px;
-    height: 50px;
-    background: #FFFFFF;
     position: fixed;
     top: 100px;
     left: 50%;
-    display: flex;
-    align-items: stretch;
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 900;
     border-radius: 5px;
     transform: translateX(-50%);
+
+    & .alert__line {
+        background: index.$bg-teal;
+        height: 2px;
+        float: right;
+    }
+
+    @include index.devices(md) {
+        top: 120px;
+    }
+
+    @include index.devices(sm) {
+        width: 95%;
+        top: 70px;
+    }
+}
+
+.alert__wrap {
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: stretch;
 
     & .type_wrap {
         width: 10%;
@@ -85,7 +104,6 @@
     }
 
     @include index.devices(md) {
-        top: 120px;
 
         & .close_wrap {
             & .close_icon {
@@ -95,8 +113,6 @@
     }
 
     @include index.devices(sm) {
-        width: 95%;
-        top: 70px;
 
         & .type_wrap {
             width: 15%;
