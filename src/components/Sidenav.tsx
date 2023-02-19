@@ -29,11 +29,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 
-interface Props {
-    page: string
-}
-
-const Sidenav: React.FC<Props> = ({page}) => {
+const Sidenav: React.FC<CompWithPropsOnly<SidenavProps>> = (props) => {
+    const { page } = props.propsObj
+    
     let navigate = useNavigate()
 
     const logoutUser = useUserStore(state => state.logoutUser)

@@ -1,16 +1,7 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo } from "react";
 
-interface Props {
-    children: ReactNode;
-}
-
-interface State {
-    error: Error | null;
-    errorInfo: ErrorInfo | null;
-}
-
-class ErrorBoundary extends Component<Props, State> {
-    constructor(props: Props) {
+class ErrorBoundary extends Component<CompWithChildrenOnly, ErrorBoundaryStateProps> {
+    constructor(props: CompWithChildrenOnly) {
         super(props);
         this.state = { error: null, errorInfo: null };
     }

@@ -9,17 +9,10 @@ import Button from "../components/Button";
 import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import useUserStore from "../store/zustand/userStore";
 import useAlertStore from "../store/zustand/alertStore";
-import { User, CompleteUser } from "../store/zustand/userStore";
-
-interface Value {
-    email: string;
-    password: string;
-}
-
 
 const Login: React.FC = () => {
     let navigate: NavigateFunction = useNavigate()
-    let [values, setValues] = useState<Value>({email: "", password: ""})
+    let [values, setValues] = useState<LoginFormValues>({email: "", password: ""})
 
     let isLoggedIn = useUserStore(state => state.isLoggedIn)
     let setUser = useUserStore(state => state.setUser)
@@ -33,7 +26,7 @@ const Login: React.FC = () => {
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValues((prevState: Value) => {
+        setValues((prevState: LoginFormValues) => {
             return {...prevState, [e.target.name]: e.target.value}
         })
     }
@@ -123,12 +116,12 @@ const Login: React.FC = () => {
                         <p className={classes.form__instruction}>Enter details to login.</p>
                         <div className={classes.form__input_wrap}>
                             <ErrorBoundary>
-                                <Input inputProps={emailProps} />
+                                <Input propsObj={emailProps} />
                             </ErrorBoundary>
                         </div>
                         <div className={classes.form__input_wrap}>
                             <ErrorBoundary>
-                                <Input inputProps={passwordProps} />
+                                <Input propsObj={passwordProps} />
                             </ErrorBoundary>
                         </div>
                         <Link to="#" className={classes.forgot_password}>
@@ -136,7 +129,7 @@ const Login: React.FC = () => {
                         </Link>
                         <div className={classes.form__button_wrap}>
                             <ErrorBoundary>
-                                <Button btnProps={buttonProps} />
+                                <Button propsObj={buttonProps} />
                             </ErrorBoundary>
                         </div>
                     </form>

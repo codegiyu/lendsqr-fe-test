@@ -3,62 +3,7 @@ import classes from "./Pagination.module.scss";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import uuid from "react-uuid";
-
-
-const buttons = (total: number, current: number) => {
-    let arr = Array(7).fill("0")
-    arr[0] = "1"
-    arr[6] = String(total)
-
-    if (total <= 7) return Array(total).fill("").map((item, idx) => item + ++idx)
-
-    if (current === 1 || current === 2) {
-        arr[1] = "2"
-        arr[2] = "3"
-        arr[3] = "..."
-        arr[4] = String(total - 2)
-        arr[5] = String(total - 1)
-    }
-
-    if (current === 3) {
-        arr[1] = "2"
-        arr[2] = "3"
-        arr[3] = "4"
-        arr[4] = "..."
-        arr[5] = String(total - 1)
-    }
-
-    if (current > 3 && current < total - 2) {
-        arr[1] = "..."
-        arr[2] = String(current - 1)
-        arr[3] = String(current)
-        arr[4] = String(current + 1)
-        arr[5] = "..."
-    }
-
-    if (current === total - 2) {
-        arr[1] = "2"
-        arr[2] = "..."
-        arr[3] = String(total - 3)
-        arr[4] = String(total - 2)
-        arr[5] = String(total - 1)
-    }
-
-    if (current === total || current === total - 1) {
-        arr[1] = "2"
-        arr[2] = "3"
-        arr[3] = "..."
-        arr[4] = String(total - 2)
-        arr[5] = String(total - 1)
-    }
-
-    return arr
-}
-
-interface Disabled {
-    prev: boolean;
-    next: boolean;
-}
+import helpers from "../helpers/allHelpers";
 
 const Pagination: React.FC = () => {
 
@@ -68,7 +13,7 @@ const Pagination: React.FC = () => {
     let setCurrentPage = useAllUsersStore(state => state.setCurrentPage)
     let setPageItemLimit = useAllUsersStore(state => state.setPageItemLimit)
 
-    let [disabled, setDisabled] = useState<Disabled>({ prev: true, next: false })
+    let [disabled, setDisabled] = useState<PaginationControls>({ prev: true, next: false })
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setPageItemLimit(e.target.value)
@@ -86,8 +31,8 @@ const Pagination: React.FC = () => {
         setCurrentPage(currentPage + 1)
     }
 
-    let total = Math.ceil(totalUsers / Number(pageItemLimit))
-    let btnArray = buttons(total, currentPage)
+    const total = Math.ceil(totalUsers / Number(pageItemLimit))
+    const btnArray = helpers.paginationButtons(total, currentPage)
 
     useEffect(() => {
         if (currentPage === 1 && !disabled.prev) {

@@ -4,8 +4,6 @@ import Layout from "../layout/Layout";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import useUserStore from "../store/zustand/userStore";
 import useAlertStore from "../store/zustand/alertStore";
-import { CompleteUser } from "../store/zustand/userStore";
-import { StatusedUser } from "../store/zustand/allUsersStore";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import StatusBox from "../components/StatusBox";
 import blockUsers from "../images/block-users.svg";
@@ -17,20 +15,10 @@ import Pagination from "../components/Pagination";
 import { IoFilterSharp } from "react-icons/io5";
 import UserRow from "../components/UserRow";
 import uuid from "react-uuid";
-import { UserRowData } from "../components/UserRow";
 import Modal from "../components/Modal";
 import Input, { Select } from "../components/Input";
-import Button, { GhostButton, Ghost } from "../components/Button";
-import { stringDate, formatPhone } from "../components/UserRow";
-
-interface FilterValues {
-    organization: string;
-    username: string;
-    email: string;
-    date: string;
-    phone: string;
-    status: string;
-}
+import Button, { GhostButton } from "../components/Button";
+import helpers from "../helpers/allHelpers";
 
 let defaultFilters: FilterValues = {
     organization: "",
@@ -40,7 +28,6 @@ let defaultFilters: FilterValues = {
     phone: "",
     status: "",
 }
-
 
 const Home: React.FC = () => {
     let navigate: NavigateFunction = useNavigate()
@@ -95,11 +82,9 @@ const Home: React.FC = () => {
         if (status) queryArr.push(`status=${status}`)
 
         let query: string = queryArr.join("&")
-        console.log(query)
 
         if (query) {
             navigate(`/?${query}`, {replace: true})
-            console.log("query")
             let filteredArr = allUsers
 
             if(filteredArr) {
@@ -113,10 +98,10 @@ const Home: React.FC = () => {
                     filteredArr = filteredArr.filter(item => item.email.includes(email))
                 }
                 if (date) {
-                    filteredArr = filteredArr.filter(item => stringDate(item.createdAt).includes(stringDate(date).slice(0, 12)))
+                    filteredArr = filteredArr.filter(item => helpers.stringDate(item.createdAt).includes(helpers.stringDate(date).slice(0, 12)))
                 }
                 if (phone) {
-                    filteredArr = filteredArr.filter(item => formatPhone(item.phoneNumber).includes(phone))
+                    filteredArr = filteredArr.filter(item => helpers.formatPhone(item.phoneNumber).includes(phone))
                 }
                 if (status) {
                     filteredArr = filteredArr.filter(item => item.status.includes(status))
@@ -125,7 +110,6 @@ const Home: React.FC = () => {
                 if (!filteredArr.length) {
                     setFilteredUsers(null)
                 } else {
-                    console.log("filtered")
                     setFilteredUsers(filteredArr)
                 }
             }
@@ -147,7 +131,6 @@ const Home: React.FC = () => {
     })
 
     useEffect(() => {
-        console.log(allUsers)
         if (!allUsers) {
             fetch("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users")
             .then(response => {
@@ -180,7 +163,6 @@ const Home: React.FC = () => {
                         status
                     }
                 })
-                console.log("I ran")
                 setAllUsers(statusedRes)
                 setFilteredUsers(statusedRes)
             })
@@ -190,7 +172,6 @@ const Home: React.FC = () => {
                     type: "error" 
                 })
             })
-
         }
     }, [setAlert, setAllUsers, allUsers, setFilteredUsers])
 
@@ -213,51 +194,51 @@ const Home: React.FC = () => {
         
     }, [paginatedUsers, currentPage])
 
-    let totalObj = {
+    let totalObj: StatusBoxProps = {
         image: blockUsers,
         title: "Users",
         text: String(totalUsers)
     }
 
-    let activeObj = {
+    let activeObj: StatusBoxProps = {
         image: blockActive,
         title: "Active Users",
         text: String(activeUsers)
     }
 
-    let loanObj = {
+    let loanObj: StatusBoxProps = {
         image: blockLoans,
         title: "Users With Loans",
         text: String(loanUsers)
     }
 
-    let savingsObj = {
+    let savingsObj: StatusBoxProps = {
         image: blockSavings,
         title: "Users With Savings",
         text: String(savingsUsers)
     }
 
-    let filterObj = {
+    let filterObj: ModalProps = {
         isFilter: true, 
         modalActive, 
         setModalActive
     }
 
-    let orgSelect = {
+    let orgSelect: SelectProps = {
         name: "organization",
         value: filterValues.organization,
         options: [["", "Select"], ["Lendsqr", "Lendsqr"], ["Lendstar", "Lendstar"], ["Irorun", "Irorun"]],
         handleSelectChange
     }
 
-    let statusSelect = {
+    let statusSelect: SelectProps = {
         name: "status",
         value: filterValues.status,
         options: [["", "Select"], ["Active", "Active"], ["Inactive", "Inactive"], ["Pending", "Pending"], ["Blacklisted", "Blacklisted"]],
         handleSelectChange
     }
 
-    let usernameInput = {
+    let usernameInput: InputProps = {
         name: "username", 
         type: "text", 
         placeholder: "User",
@@ -266,7 +247,7 @@ const Home: React.FC = () => {
         fromFilter: true
     }
 
-    let emailInput = {
+    let emailInput: InputProps = {
         name: "email", 
         type: "text", 
         placeholder: "Email",
@@ -275,7 +256,7 @@ const Home: React.FC = () => {
         fromFilter: true
     }
 
-    let dateInput = {
+    let dateInput: InputProps = {
         name: "date", 
         type: "date", 
         placeholder: "Date",
@@ -284,7 +265,7 @@ const Home: React.FC = () => {
         fromFilter: true
     }
 
-    let phoneInput = {
+    let phoneInput: InputProps = {
         name: "phone", 
         type: "text", 
         placeholder: "Phone Number",
@@ -293,7 +274,7 @@ const Home: React.FC = () => {
         fromFilter: true
     }
 
-    let resetBtnObj: Ghost = {
+    let resetBtnObj: GhostBtnProps = {
         text: "Reset",
         type: "reset",
         color: "grey",
@@ -305,53 +286,53 @@ const Home: React.FC = () => {
         }
     }
 
-    let filterBtnObj = {
+    let filterBtnObj: BtnProps = {
         text: "Filter",
         fromFilter: true
     }
     
     return (
-        <Layout layoutProps={{ page: "Users" }}>
+        <Layout propsObj={{ page: "Users" }}>
             <section className={classes.users__content_wrap}>
                 <h1 className={classes.users__heading}>Users</h1>
                 <section className={classes.status_section}>
                     <div className={classes.status_box_wrap}>
                         <ErrorBoundary>
-                            <StatusBox stats={totalObj} />
+                            <StatusBox propsObj={ totalObj } />
                         </ErrorBoundary>
                     </div>
                     <div className={classes.status_box_wrap}>
                         <ErrorBoundary>
-                            <StatusBox stats={activeObj} />
+                            <StatusBox propsObj={ activeObj } />
                         </ErrorBoundary>
                     </div>
                     <div className={classes.status_box_wrap}>
                         <ErrorBoundary>
-                            <StatusBox stats={loanObj} />
+                            <StatusBox propsObj={ loanObj } />
                         </ErrorBoundary>
                     </div>
                     <div className={classes.status_box_wrap}>
                         <ErrorBoundary>
-                            <StatusBox stats={savingsObj} />
+                            <StatusBox propsObj={ savingsObj } />
                         </ErrorBoundary>
                     </div>
                 </section>
                 <section className={classes.table_section}>
                     <ErrorBoundary>
-                        <Modal modalProps={filterObj}>
+                        <Modal propsObj={filterObj}>
                             <form onSubmit={handleFilterSubmit}>
-                                <Select selectObj={orgSelect} />
-                                <Input inputProps={usernameInput} />
-                                <Input inputProps={emailInput} />
-                                <Input inputProps={dateInput} />
-                                <Input inputProps={phoneInput} />
-                                <Select selectObj={statusSelect} />
+                                <Select propsObj={orgSelect} />
+                                <Input propsObj={usernameInput} />
+                                <Input propsObj={emailInput} />
+                                <Input propsObj={dateInput} />
+                                <Input propsObj={phoneInput} />
+                                <Select propsObj={statusSelect} />
                                 <div className={classes.btn_row}>
                                     <div className={classes.btn_wrap}>
-                                        <GhostButton btnProps={resetBtnObj} />
+                                        <GhostButton propsObj={resetBtnObj} />
                                     </div>
                                     <div className={classes.btn_wrap}>
-                                        <Button btnProps={filterBtnObj} />
+                                        <Button propsObj={filterBtnObj} />
                                     </div>
                                 </div>
                             </form>
@@ -432,7 +413,7 @@ const Home: React.FC = () => {
                             </thead>
                             <tbody>
                                 { pageData.length ? (
-                                    pageData.map(item => <UserRow key={uuid()} userData={item} />)
+                                    pageData.map(item => <UserRow key={uuid()} propsObj={item} />)
                                     ) : null
                                 }
                             </tbody>

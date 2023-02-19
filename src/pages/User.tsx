@@ -1,44 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "./User.module.scss";
 import Layout from "../layout/Layout";
 import { Link, NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import useUserStore from "../store/zustand/userStore";
 import useAlertStore from "../store/zustand/alertStore";
-import { StatusedUser } from "../store/zustand/allUsersStore";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import uuid from "react-uuid";
-import { GhostButton, Ghost } from "../components/Button";
-import { Disabled, formatPhone } from "../components/UserRow";
+import { GhostButton } from "../components/Button";
 import star from "../images/star-full.svg";
 import noStar from "../images/star.svg";
 import DetailSingle from "../components/DetailSingle";
 import DetailsBlock from "../components/DetailsBlock";
-
-
-const generateAccount = (str: string | null | undefined) => {
-    let result: string = "";
-
-    if (str) {
-        for (let char of str.split("")) {
-            result += char.charCodeAt(0)
-        }
-    
-        return result.slice(0, 10)
-    }
-
-    return "1234567890"
-}
-
-const getIncome = (arr: string[] | undefined) => {
-    if (arr) {
-        return arr[0] < arr[1] 
-        ? `₦${Math.floor(Number(arr[0]) / 100) * 100} - ₦${Math.ceil(Number(arr[1]) / 100) * 100}`
-        : `₦${Math.floor(Number(arr[1]) / 100) * 100} - ₦${Math.ceil(Number(arr[0]) / 100) * 100}`
-    }
-    return "nil"
-}
+import helpers from "../helpers/allHelpers";
 
 const User: React.FC = () => {
     let navigate: NavigateFunction = useNavigate()
@@ -48,18 +23,39 @@ const User: React.FC = () => {
     const activateUser = useAllUsersStore(state => state.activateUser)
     const blacklistUser = useAllUsersStore(state => state.blacklistUser)
 
+    const { id } = useParams()
+
     let [pageData, setPageData] = useState<StatusedUser | null | undefined>(null)
-    let [disabled, setDisabled] = useState<Disabled>({ activate: true, blacklist: false })
+    let [disabled, setDisabled] = useState<UserRowOptionsButtonsDisabledState>({ activate: true, blacklist: false })
+
+    const updatePageData = useCallback(() => {
+        const userData: StatusedUser | null | undefined = allUsers !== null
+            ? allUsers.find(item => item.id === id)
+            : null
+        console.log(userData?.status)
+        if (userData) {
+            if (userData.status[0] === "Blacklisted") {
+                console.log("Blacklisted")
+                setDisabled({ activate: false, blacklist: true })
+            } else {
+                console.log("activated")
+                setDisabled({ activate: true, blacklist: false })
+            }
+        }
+        setPageData(userData)
+    }, [allUsers, id])
 
     const handleActivate = () => {
         if (pageData) {
             activateUser(pageData?.id)
+            updatePageData()
         }
     }
 
     const handleBlacklist = () => {
         if (pageData) {
             blacklistUser(pageData?.id)
+            updatePageData()
         }
     }
 
@@ -70,25 +66,11 @@ const User: React.FC = () => {
         }
     })
 
-    const { id } = useParams()
-
     useEffect(() => {
-        const userData: StatusedUser | null | undefined = allUsers !== null
-        ? allUsers.find(item => item.id === id)
-        : null
+        updatePageData()
+    }, [id, allUsers, updatePageData])
 
-        setPageData(userData)
-    }, [id, allUsers])
-
-    useEffect(() => {
-        if (pageData?.status[0] === "Blacklisted") {
-            setDisabled({ activate: false, blacklist: true })
-        } else {
-            setDisabled({ activate: true, blacklist: false })
-        }
-    }, [pageData])
-
-    let activateBtnObj: Ghost = {
+    let activateBtnObj: GhostBtnProps = {
         text: "Activate User",
         type: "button",
         color: "teal",
@@ -96,7 +78,7 @@ const User: React.FC = () => {
         handleClick: handleActivate
     }
 
-    let blacklistBtnObj: Ghost = {
+    let blacklistBtnObj: GhostBtnProps = {
         text: "Blacklist User",
         type: "button",
         color: "red",
@@ -112,7 +94,7 @@ const User: React.FC = () => {
             },
             {
                 title: "Phone Number",
-                value: formatPhone(pageData?.phoneNumber)
+                value: helpers.formatPhone(pageData?.phoneNumber)
             },
             {
                 title: "Email Address",
@@ -162,7 +144,7 @@ const User: React.FC = () => {
             },
             {
                 title: "Monthly Income",
-                value: getIncome(pageData?.education.monthlyIncome)
+                value: helpers.getIncome(pageData?.education.monthlyIncome)
             },
             {
                 title: "Loan Repayment",
@@ -190,7 +172,7 @@ const User: React.FC = () => {
             },
             {
                 title: "Phone Number",
-                value: formatPhone(pageData?.guarantor.phoneNumber)
+                value: helpers.formatPhone(pageData?.guarantor.phoneNumber)
             },
             {
                 title: "Email",
@@ -204,7 +186,7 @@ const User: React.FC = () => {
     }
     
     return (
-        <Layout layoutProps={{ page: "Users" }}>
+        <Layout propsObj={{ page: "Users" }}>
             <section className={classes.users__content_wrap}>
                 <Link to="/" className={classes.back_button_link}>
                     <div className={classes.back_button_wrap}>
@@ -217,8 +199,8 @@ const User: React.FC = () => {
                 <div className={classes.page_heading_wrap}>
                     <h1 className={classes.users__heading}>User Details</h1>
                     <div className={classes.heading_btns_wrap}>
-                        <GhostButton btnProps={blacklistBtnObj} />
-                        <GhostButton btnProps={activateBtnObj} />
+                        <GhostButton propsObj={blacklistBtnObj} />
+                        <GhostButton propsObj={activateBtnObj} />
                     </div>
                 </div>
 
@@ -260,7 +242,7 @@ const User: React.FC = () => {
                             </div>
                             <div className={classes.bank_details}>
                                 <p className={classes.bank_balance}>{`₦${pageData?.accountBalance}`}</p>
-                                <p className={classes.bank_account}>{`${generateAccount(pageData?.accountNumber)}/Providus Bank`}</p>
+                                <p className={classes.bank_account}>{`${helpers.generateAccount(pageData?.accountNumber)}/Providus Bank`}</p>
                             </div>
                         </div>
                     </div>
@@ -278,23 +260,23 @@ const User: React.FC = () => {
 
                 <section className={classes.general_details_tab}>
                     <ErrorBoundary>
-                        <DetailsBlock blockProps={{ heading: "Personal Information"}}>
-                            { details.personal.map(item => <DetailSingle key={uuid()} detailProps={item} />)}
+                        <DetailsBlock propsObj={{ heading: "Personal Information"}}>
+                            { details.personal.map(item => <DetailSingle key={uuid()} propsObj={item} />)}
                         </DetailsBlock>
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <DetailsBlock blockProps={{ heading: "Education and Employment"}}>
-                            { details.education.map(item => <DetailSingle key={uuid()} detailProps={item} />)}
+                        <DetailsBlock propsObj={{ heading: "Education and Employment"}}>
+                            { details.education.map(item => <DetailSingle key={uuid()} propsObj={item} />)}
                         </DetailsBlock>
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <DetailsBlock blockProps={{ heading: "Socials"}}>
-                            { details.social.map(item => <DetailSingle key={uuid()} detailProps={item} />)}
+                        <DetailsBlock propsObj={{ heading: "Socials"}}>
+                            { details.social.map(item => <DetailSingle key={uuid()} propsObj={item} />)}
                         </DetailsBlock>
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <DetailsBlock blockProps={{ heading: "Guarantor"}}>
-                            { details.guarantor.map(item => <DetailSingle key={uuid()} detailProps={item} />)}
+                        <DetailsBlock propsObj={{ heading: "Guarantor"}}>
+                            { details.guarantor.map(item => <DetailSingle key={uuid()} propsObj={item} />)}
                         </DetailsBlock>
                     </ErrorBoundary>
                 </section>

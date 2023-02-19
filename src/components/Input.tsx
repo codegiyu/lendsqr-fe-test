@@ -2,33 +2,8 @@ import React, { useState } from "react";
 import classes from "./Input.module.scss";
 import uuid from "react-uuid";
 
-interface Obj {
-    name: string; 
-    type: React.HTMLInputTypeAttribute | undefined; 
-    placeholder: string;
-    passwordVisibilityToggle?: boolean;
-    value: string; 
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    fromFilter?: boolean;
-}
-
-interface Props {
-    inputProps: Obj;
-}
-
-interface SelectObj {
-    name: string;
-    value: string;
-    options: string[][];
-    handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-interface SelectProps {
-    selectObj: SelectObj
-}
-
-export const Select: React.FC<SelectProps> = (props) => {
-    let {name, value, options, handleSelectChange} = props.selectObj
+export const Select: React.FC<CompWithPropsOnly<SelectProps>> = (props) => {
+    let {name, value, options, handleSelectChange} = props.propsObj
 
     let label = name[0].toUpperCase() + name.slice(1)
 
@@ -42,8 +17,8 @@ export const Select: React.FC<SelectProps> = (props) => {
     )
 }
 
-const Input: React.FC<Props> = (props) => {
-    let {name, type, placeholder, passwordVisibilityToggle = false, value, handleChange, fromFilter = false} = props.inputProps
+const Input: React.FC<CompWithPropsOnly<InputProps>> = (props) => {
+    let {name, type, placeholder, passwordVisibilityToggle = false, value, handleChange, fromFilter = false} = props.propsObj
 
     let [passwordVisibility, setPasswordVisibility] = useState<boolean>(false)
 

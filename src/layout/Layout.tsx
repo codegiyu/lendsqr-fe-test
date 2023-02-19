@@ -18,18 +18,8 @@ import profile from "../images/nav-user.svg";
 import useAlertStore from "../store/zustand/alertStore";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 
-
-interface layoutProps {
-    page: string;
-}
-
-interface Props {
-    layoutProps: layoutProps;
-    children: React.ReactNode;
-}
-
-const Layout: React.FC<Props> = (props) => {
-    let {page} = props.layoutProps
+const Layout: React.FC<CompWithChildrenAndProps<SidenavProps>> = (props) => {
+    let {page} = props.propsObj
 
     let navigate = useNavigate()
 
@@ -91,12 +81,12 @@ const Layout: React.FC<Props> = (props) => {
                         <div className={classes.search_form__wrap}>
                             <div className={classes.search__input_wrap}>
                                 <ErrorBoundary>
-                                    <Input inputProps={searchProps} />
+                                    <Input propsObj={searchProps} />
                                 </ErrorBoundary>
                             </div>
                             <div className={classes.search__btn_wrap}>
                                 <ErrorBoundary>
-                                    <Button btnProps={{}}>
+                                    <Button propsObj={{}}>
                                         <TbSearch className={classes.search_icon} />
                                     </Button>
                                 </ErrorBoundary>
@@ -122,7 +112,7 @@ const Layout: React.FC<Props> = (props) => {
                             <span>
                             <IoMdArrowDropdown className={classes.page__dropdown_icon} />
                             </span>
-                            <Modal modalProps={{ forProfile: true, modalActive, setModalActive }}>
+                            <Modal propsObj={{ forProfile: true, modalActive, setModalActive }}>
                                 <div className={classes.modal_wrap}>
                                     <Link to={`/user/${user.id}`} className={classes.profile_link}>
                                         <button className={classes.user_modal_button}>
@@ -164,12 +154,12 @@ const Layout: React.FC<Props> = (props) => {
                             <div className={classes.search_form__wrap}>
                                 <div className={classes.search__input_wrap}>
                                     <ErrorBoundary>
-                                        <Input inputProps={searchProps} />
+                                        <Input propsObj={searchProps} />
                                     </ErrorBoundary>
                                 </div>
                                 <div className={classes.search__btn_wrap}>
                                     <ErrorBoundary>
-                                        <Button btnProps={{}}>
+                                        <Button propsObj={{}}>
                                             <TbSearch className={classes.search_icon} />
                                         </Button>
                                     </ErrorBoundary>
@@ -195,7 +185,7 @@ const Layout: React.FC<Props> = (props) => {
                                 <span>
                                 <IoMdArrowDropdown className={classes.page__dropdown_icon} />
                                 </span>
-                                <Modal modalProps={{ forProfile: true, modalActive, setModalActive }}>
+                                <Modal propsObj={{ forProfile: true, modalActive, setModalActive }}>
                                     <div className={classes.modal_wrap}>
                                         <Link to={`/user/${user.id}`} className={classes.profile_link}>
                                             <button className={classes.user_modal_button}>
@@ -222,7 +212,7 @@ const Layout: React.FC<Props> = (props) => {
                             </div>
                         </div>
                         <div>
-                            <Sidenav page={page} />
+                            <Sidenav propsObj={{ page }} />
                         </div>
                     </div>
                 </div>
@@ -230,7 +220,7 @@ const Layout: React.FC<Props> = (props) => {
             <main className={classes.page__main}>
                 <div className={classes.page__sidenav}>
                     <ErrorBoundary>
-                        <Sidenav page={page} />
+                        <Sidenav propsObj={{ page }} />
                     </ErrorBoundary>
                 </div>
                 <div className={classes.page__content_wrap}>

@@ -1,17 +1,7 @@
 import classes from "./StatusBox.module.scss";
 
-interface Stats {
-    image: string;
-    title: string;
-    text: string;
-}
-
-interface Props {
-    stats: Stats
-}
-
-const StatusBox: React.FC<Props> = (props) => {
-    let {image, title, text} = props.stats
+const StatusBox: React.FC<CompWithPropsOnly<StatusBoxProps>> = (props) => {
+    let {image, title, text} = props.propsObj
 
     return (
         <div className={classes.status_box}>

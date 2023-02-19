@@ -1,29 +1,8 @@
 import React from "react";
 import classes from "./Button.module.scss";
 
-interface BtnObj {
-    text?: string; 
-    type?: "submit" | "button" | "reset" | undefined;
-    disabled?: boolean;
-    fromFilter?: boolean
-    handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-}
-
-interface Props {
-    btnProps: BtnObj;
-    children?: React.ReactNode
-}
-
-export interface Ghost extends BtnObj {
-    color: string;
-}
-
-interface GhostProps {
-    btnProps: Ghost;
-}
-
-export const GhostButton: React.FC<GhostProps> = (props) => {
-    let {text, type = "button", disabled = false, handleClick, color} = props.btnProps
+export const GhostButton: React.FC<CompWithPropsOnly<GhostBtnProps>> = (props) => {
+    let {text, type = "button", disabled = false, handleClick, color} = props.propsObj
 
     if (color === "teal") {
         return (
@@ -60,8 +39,8 @@ export const GhostButton: React.FC<GhostProps> = (props) => {
     )
 }
 
-const Button: React.FC<Props> = (props) => {
-    let {text, type = "submit", disabled = false, fromFilter = false} = props.btnProps
+const Button: React.FC<CompWithChildrenAndProps<BtnProps>> = (props) => {
+    let {text, type = "submit", disabled = false, fromFilter = false} = props.propsObj
 
     if(!text) {
         return (

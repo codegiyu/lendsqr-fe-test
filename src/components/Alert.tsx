@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import classes from "./Alert.module.scss";
 import useAlertStore from "../store/zustand/alertStore";
 import { IoClose } from "react-icons/io5";
@@ -24,7 +24,6 @@ const Alert: React.FC = () => {
 
     const startTimer = () => {
         if (newTimeElapsed.current !== null) {
-            console.log(newTimeElapsed.current)
             return;
         }
 
@@ -33,15 +32,14 @@ const Alert: React.FC = () => {
         }, 10)
     }
 
-    const stopTimer = () => {
+    const stopTimer = useCallback(() => {
         if (newTimeElapsed.current) {
             clearInterval(newTimeElapsed.current)
             setTimeElapsed(0)
             clearAlert()
             newTimeElapsed.current = null
-            console.log("stopped")
         }
-    }
+    }, [clearAlert])
 
     let alertBg = alert.type === "success" 
         ? "#23AC00" : alert.type === "info"
@@ -64,7 +62,6 @@ const Alert: React.FC = () => {
     useEffect(() => {
         if (alert.message) {
             startTimer()
-            console.log("started")
         }
     }, [alert.message])
 
@@ -73,8 +70,7 @@ const Alert: React.FC = () => {
             stopTimer()
         }
         
-        console.log(timeElapsed)
-    }, [timeElapsed])
+    }, [timeElapsed, stopTimer])
 
 
     

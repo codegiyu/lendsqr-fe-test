@@ -2,79 +2,23 @@ import React, { useState, useEffect } from "react";
 import classes from "./UserRow.module.scss";
 import { HiDotsVertical, HiOutlineEye } from "react-icons/hi";
 import Modal from "./Modal";
-import ErrorBoundary from "./ErrorBoundary";
 import activate from "../images/activate.svg";
 import blacklist from "../images/blacklist.svg";
 import useAllUsersStore from "../store/zustand/allUsersStore";
 import { Link } from "react-router-dom";
+import helpers from "../helpers/allHelpers";
 
-export const stringDate = (str: string | undefined) => {
-    if (str) {
-        let date = new Date(str)
-    
-        let day: string[] | string = date.toString().slice(4, 15).split("")
-        day.splice(6, 0, ",")
-        day = day.join("")
-    
-        let time: string[] | string = date.toLocaleTimeString().split("")
-        time.splice(-6, 3)
-        time = time.join("")
-    
-        return day + " " + time
-    }
-    return "nil"
-}
-
-const formatOrgName = (name: string | undefined) => {
-    if (name) {
-        return name[0].toUpperCase() + name.slice(1)
-    }
-    return "nil"
-}
-
-export const formatPhone = (phone: string | undefined) => {
-    if (phone) {
-        let formattedPhone = phone.split("x")[0]
-        return formattedPhone.replaceAll(".", "-")
-    }
-    return "nil"
-}
-
-export interface UserRowData {
-    id: string;
-    orgName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    createdAt: string;
-    status: string[];
-}
-
-interface Props {
-    userData: UserRowData;
-}
-
-export interface Disabled {
-    activate: boolean;
-    blacklist: boolean;
-}
-
-const UserRow: React.FC<Props> = (props) => {
-    let {id, orgName, firstName, lastName, email, phoneNumber, createdAt, status} = props.userData
+const UserRow: React.FC<CompWithPropsOnly<UserRowData>> = (props) => {
+    let {id, orgName, firstName, lastName, email, phoneNumber, createdAt, status} = props.propsObj
 
     const activateUser = useAllUsersStore(state => state.activateUser)
     const blacklistUser = useAllUsersStore(state => state.blacklistUser)
 
     let [modalActive, setModalActive] = useState<boolean>(false)
-    let [disabled, setDisabled] = useState<Disabled>({ activate: true, blacklist: false })
+    let [disabled, setDisabled] = useState<UserRowOptionsButtonsDisabledState>({ activate: true, blacklist: false })
 
     const handleDotsClick = () => {
         setModalActive((prevState: boolean) => !prevState)
-    }
-
-    const handleDotsBlur = () => {
-        setModalActive(false)
     }
 
     const handleActivate = () => {
@@ -96,7 +40,7 @@ const UserRow: React.FC<Props> = (props) => {
     return (
         <tr >
             <td >
-                <p >{formatOrgName(orgName.split("-")[0])}</p>
+                <p >{helpers.formatOrgName(orgName.split("-")[0])}</p>
             </td>
             <td >
                 <p >{`${firstName} ${lastName}`}</p>
@@ -105,10 +49,10 @@ const UserRow: React.FC<Props> = (props) => {
                 <p >{email}</p>
             </td>
             <td >
-                <p >{formatPhone(phoneNumber)}</p>
+                <p >{helpers.formatPhone(phoneNumber)}</p>
             </td>
             <td >
-                <p >{stringDate(createdAt)}</p>
+                <p >{helpers.stringDate(createdAt)}</p>
             </td>
             <td >
                 { status[0] === "Blacklisted" ? (
@@ -124,10 +68,10 @@ const UserRow: React.FC<Props> = (props) => {
                 }
             </td>
             <td  className={classes.button_cell}>
-                <button className={classes.dots_button} onClick={handleDotsClick} onBlur={handleDotsBlur}>
+                <button className={classes.dots_button} onClick={handleDotsClick} >
                     <HiDotsVertical className={classes.dots_icon} />
                 </button>
-                <Modal modalProps={{modalActive, setModalActive}}>
+                <Modal propsObj={{modalActive, setModalActive}}>
                     <div className={classes.modal_wrap}>
                         <Link to={`/user/${id}`} className={classes.modal_link}>
                             <button className={classes.user_modal_button}>

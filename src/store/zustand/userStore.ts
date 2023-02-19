@@ -1,23 +1,7 @@
 import create from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-export interface User {
-    firstname: string,
-    lastname: string,
-    avatar: string,
-    id: string,
-    email: string
-}
-
-interface UserState {
-    isLoggedIn: boolean,
-    user: User,
-    setIsLoggedIn: (val: boolean) => void,
-    setUser: (obj : User) => void,
-    logoutUser: () => void
-}
-
-const noUser = {
+const noUser: User = {
     firstname: "",
     lastname: "",
     avatar: "",
@@ -25,59 +9,7 @@ const noUser = {
     email: ""
 }
 
-
-interface UserProfile {
-    "firstName": string;
-    "lastName": string;
-    "phoneNumber": string;
-    "avatar": string;
-    "gender": string;
-    "bvn": string;
-    "address": string;
-    "currency": string;
-}
-
-interface UserGuarantor {
-    "firstName": string;
-    "lastName": string;
-    "phoneNumber": string;
-    "gender": string;
-    "address": string;
-}
-
-interface UserSocials {
-    "facebook": string;
-    "instagram": string;
-    "twitter": string;
-}
-
-interface UserEducation {
-    "level": string;
-    "employmentStatus": string;
-    "sector": string;
-    "duration": string;
-    "officeEmail": string;
-    "monthlyIncome": string[];
-    "loanRepayment": string;
-}
-
-export interface CompleteUser {
-    "createdAt": string;
-    "orgName": string;
-    "userName": string;
-    "email": string;
-    "phoneNumber": string;
-    "lastActiveDate": string;
-    "profile": UserProfile;
-    "guarantor": UserGuarantor;
-    "accountBalance": string;
-    "accountNumber": string;
-    "socials": UserSocials;
-    "education": UserEducation;
-    "id": string;
-}
-
-const useUserStore = create<UserState>()(
+const useUserStore = create<UserStoreState>()(
     persist((set) => ({
         isLoggedIn: false,
         user: {

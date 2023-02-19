@@ -1,49 +1,8 @@
 import create from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { CompleteUser } from "./userStore";
+import helpers from "../../helpers/allHelpers";
 
-export interface StatusedUser extends CompleteUser {
-    status: string[]
-}
-
-interface Store {
-    allUsers: StatusedUser[] | null;
-    totalUsers: number;
-    activeUsers: number;
-    loanUsers: number;
-    savingsUsers: number;
-    pageItemLimit: string;
-    paginatedUsers: StatusedUser[][] | [];
-    currentPage: number;
-    filteredUsers: StatusedUser[] | null;
-    setAllUsers: (arr: StatusedUser[] | null) => void;
-    clearAllUsers: () => void;
-    setPageItemLimit: (str: string) => void;
-    setPaginatedUsers: () => void;
-    setCurrentPage: (num: number) => void;
-    blacklistUser: (id: string) => void;
-    activateUser: (id: string) => void;
-    setFilteredUsers: (arr: StatusedUser[] | null) => void;
-    resetFilteredUsers: () => void;
-}
-
-const pagination = (num: number, arr: StatusedUser[] | null) => {
-    let currentIndex = 0, pages = []
-
-    if (arr === null) return []
-
-    if (num <= 0) num = 1
-
-    while (currentIndex < arr.length) {
-        let page = arr.slice(currentIndex, currentIndex + num)
-        pages.push(page)
-        currentIndex += num
-    }
-
-    return pages
-}
-
-const useAllUsersStore = create<Store>()(
+const useAllUsersStore = create<AllUsersStoreState>()(
     persist((set, get) => ({
         allUsers: null,
         totalUsers: 0,
@@ -95,7 +54,7 @@ const useAllUsersStore = create<Store>()(
         },
         setPaginatedUsers: () => {
             let num = Number(get().pageItemLimit), arr = get().filteredUsers;
-            let newArr = arr ? pagination(num, arr) : []
+            let newArr = arr ? helpers.pagination(num, arr) : []
 
             set(() => (
                 { 
@@ -114,7 +73,7 @@ const useAllUsersStore = create<Store>()(
 
             let filtered = get().filteredUsers
             if (filtered) {
-                filtered = filtered?.map(item => {
+                filtered = filtered.map(item => {
                     if (item.id === id) {
                         item.status.unshift("Blacklisted")
                     }

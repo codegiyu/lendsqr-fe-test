@@ -1,18 +1,8 @@
 import React from "react";
 import classes from "./DetailsBlock.module.scss";
 
-
-interface BlockProps {
-    heading: string;
-}
-
-interface Props {
-    blockProps: BlockProps;
-    children: React.ReactNode;
-}
-
-const DetailsBlock: React.FC<Props> = (props) => {
-    let {heading} = props.blockProps
+const DetailsBlock: React.FC<CompWithChildrenAndProps<DetailsBlockProps>> = (props) => {
+    let {heading} = props.propsObj
 
     return (
         <section className={classes.details_block_wrap}>
